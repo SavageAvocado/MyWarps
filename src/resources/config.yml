@@ -1,0 +1,65 @@
+costs:
+  create: 100
+  delete: 50
+  move: 25
+  rename: 25
+  transfer: 0
+
+messages:
+  player-not-found: '&cCould not find the player &6%player%&c.'
+  not-awaiting-confirmation: '&cYou do not have any commands awaiting confirmation.'
+  invalid-arguments: '&cInvalid arguments! Try: &8/&6mywarps %command%'
+  no-permission: '&cYou do not have permission to execute this command!'
+  help:
+  - '&6MyWarps &8» &7Help'
+  - '&8/&7mywarps &6help &8» &7Displays this help page.'
+  - '&8/&7mywarps &6create <name> &8» &7Create a warp'
+  - '&8/&7mywarps &6delete <name> &8» &7Delete a warp you own'
+  - '&8/&7mywarps &6list [player] &8» &7List warps you or another player own.'
+  - '&8/&7mywarps &6move <name> &8» &7Move your warp''s location'
+  - '&8/&7mywarps &6owner <name> &8» &7Show the owner of a warp'
+  - '&8/&7mywarps &6rename <oldName> <newName> &8» &7Rename a warp'
+  - '&8/&7mywarps &6transfer <name> <player> &8» &7Transfer warp ownership to another player.'
+  list:
+    header: '&6%owner%''s &7Warps:'
+    format: '&6%warpname%&8'
+    no-warps: '&6%owner% &cdoes not own any warps.'
+  create:
+    confirm: '&7Are you sure you would like to create warp &6%warpname% &7for &6%createcost%&7? Type &8/&6mywarps &aconfirm &7to confirm.'
+    success: '&7You have created a warp!'
+    already-exists: '&cA warp with that name already exists.'
+    insufficient-funds: '&cYou do not have &6%createcost% &cneeded to create that warp.'
+  delete:
+    confirm: '&7Are you sure you would like to delete &6%warpname% &7for &6%deletecost%&7? Type &8/&6mywarps &aconfirm &7to confirm.'
+    success: '&7You have deleted a warp!'
+    not-owner: '&cYou do not own that warp.'
+    does-not-exist: '&cA warp called &6%warpname% &cdoes not exist.'
+    insufficient-funds: '&cYou do not have &6%deletecost% &cneeded to delete that warp.'
+  move:
+    confirm: '&7Are you sure you would like to move warp &6%warpname% &7to your current location? Type &8/&6mywarps &aconfirm &7to confirm.'
+    success: '&7You have moved a warp!'
+    not-owner: '&cYou do not own that warp.'
+    does-not-exist: '&cA warp called &6%warpname% &cdoes not exist.'
+    insufficient-funds: '&cYou do not have &6%movecost% &cneeded to move that warp.'
+  rename:
+    confirm: '&7Are you sure you would like to rename warp &6%oldname% &7to &6%newname%&7? Type &8/&6mywarps &aconfirm &7to confirm.'
+    success: '&7You have renamed a warp!'
+    not-owner: '&cYou do not own that warp.'
+    does-not-exist: '&cA warp called &6%warpname% &cdoes not exist.'
+    insufficient-funds: '&cYou do not have &6%renamecost% &cneeded to rename that warp.'
+    same-name: '&6%warpname% &cis already called &6%newname%&c.'
+    name-unavailable: '&cA warp with that name already exists.'
+  transfer:
+    confirm: '&7Are you sure you would like to tranfer ownership of &6%warpname% &7to &6%playername%&7? Type &8/&6mywarps &aconfirm &7to confirm.'
+    success: '&7You have transferred ownership of a warp!'
+    not-owner: '&cYou do not own that warp.'
+    does-not-exist: '&cA warp called &6%warpname% &cdoes not exist.'
+    to-self: '&cYou cannot transfer ownership to yourself.'
+    insufficient-funds: '&cYou do not have &6%transfercost% &cneeded to transfer ownership of that warp.'
+  owner: '&7That warp is owned by &6%owner%&7.'
+  no-owner: '&7That warp is not owned by anyone.'
+  cancelled: '&cOperation cancelled.'
+
+
+first-warp-commands:
+  - 'say You created your first warp with MyWarps!'

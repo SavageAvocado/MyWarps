@@ -1,0 +1,13 @@
+name: MyWarps
+description: None.
+
+author: SavageAvocado.
+website: savagedev.net
+
+depend: [Essentials, Vault]
+main: net.savagedev.mywarps.MyWarps
+version: 0.1
+
+commands:
+  mywarps:
+    description: No.
