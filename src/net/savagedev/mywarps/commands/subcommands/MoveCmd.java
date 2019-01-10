@@ -69,6 +69,7 @@ public class MoveCmd extends SubCommand implements Confirmable {
             this.getPlugin().message(user, this.getPlugin().getConfig().getString("messages.move.success"));
         } catch (Exception e) {
             this.getPlugin().message(user, "&cAn error occurred while moving warp... Please notify an admin.");
+            e.printStackTrace();
         }
     }
 }

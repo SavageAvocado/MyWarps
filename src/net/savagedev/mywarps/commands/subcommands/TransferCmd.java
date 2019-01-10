@@ -93,7 +93,7 @@ public class TransferCmd extends SubCommand implements Confirmable {
             List<String> ownedWarpsNewOwner = this.getPlugin().getConfigUtil().getConfig().getStringList(newOwnerU.getUniqueId().toString()) == null ? new ArrayList<>() : this.getPlugin().getConfigUtil().getConfig().getStringList(newOwnerU.getUniqueId().toString());
             ownedWarpsNewOwner.add(name);
 
-            this.getPlugin().getUserManager().saveWarps(user);
+            this.getPlugin().getUserManager().saveWarpsAsync(user);
 
             this.getPlugin().getConfigUtil().getConfig().set(newOwnerU.getUniqueId().toString(), ownedWarpsNewOwner);
             this.getPlugin().getConfigUtil().save();
@@ -105,6 +105,7 @@ public class TransferCmd extends SubCommand implements Confirmable {
             this.getPlugin().message(user, this.getPlugin().getConfig().getString("messages.transfer.success"));
         } catch (Exception e) {
             this.getPlugin().message(user, "&cAn error occurred while transferring warp... Please notify an admin.");
+            e.printStackTrace();
         }
     }
 }

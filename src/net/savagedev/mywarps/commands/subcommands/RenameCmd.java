@@ -81,7 +81,7 @@ public class RenameCmd extends SubCommand implements Confirmable {
             ownedWarps.remove(new CaseInsensitiveString(name));
             ownedWarps.add(new CaseInsensitiveString(newName));
 
-            this.getPlugin().getUserManager().saveWarps(user);
+            this.getPlugin().getUserManager().saveWarpsAsync(user);
 
             double cost = this.getPlugin().getConfig().getDouble("costs.rename");
             this.getPlugin().getVaultDependency().performTransaction(user, cost);
@@ -89,6 +89,7 @@ public class RenameCmd extends SubCommand implements Confirmable {
             this.getPlugin().message(user, this.getPlugin().getConfig().getString("messages.rename.success"));
         } catch (Exception e) {
             this.getPlugin().message(user, "&cAn error occurred while renaming warp... Please notify an admin.");
+            e.printStackTrace();
         }
     }
 }

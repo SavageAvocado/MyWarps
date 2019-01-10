@@ -1,5 +1,5 @@
 name: MyWarps
-description: None.
+description: Allows players to pay to create and manage their own warps.
 
 author: SavageAvocado.
 website: savagedev.net
@@ -10,4 +10,4 @@ version: 0.1
 
 commands:
   mywarps:
-    description: No.
+    description: Primary command for MyWarps.

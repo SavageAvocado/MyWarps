@@ -33,36 +33,38 @@ public class CommandE implements Listener {
         if (!command.equalsIgnoreCase("delwarp"))
             return;
 
-        for (String uuid : this.plugin.getConfigUtil().getConfig().getConfigurationSection("").getKeys(false)) {
-            if (this.plugin.getConfigUtil().getConfig().getStringList(uuid).stream().noneMatch(warpname::equalsIgnoreCase))
-                continue;
+        this.plugin.getServer().getScheduler().runTaskAsynchronously(this.plugin, () -> {
+            for (String uuid : this.plugin.getConfigUtil().getConfig().getConfigurationSection("").getKeys(false)) {
+                if (this.plugin.getConfigUtil().getConfig().getStringList(uuid).stream().noneMatch(warpname::equalsIgnoreCase))
+                    continue;
 
-            OfflinePlayer offlineUser = Bukkit.getOfflinePlayer(UUID.fromString(uuid));
+                OfflinePlayer offlineUser = Bukkit.getOfflinePlayer(UUID.fromString(uuid));
 
-            if (offlineUser.isOnline()) {
-                List<CaseInsensitiveString> ownedWarps = this.plugin.getUserManager().getUser(offlineUser).getOwnedWarps();
-                ownedWarps.remove(new CaseInsensitiveString(warpname));
+                if (offlineUser.isOnline()) {
+                    List<CaseInsensitiveString> ownedWarps = this.plugin.getUserManager().getUser(offlineUser).getOwnedWarps();
+                    ownedWarps.remove(new CaseInsensitiveString(warpname));
 
-                this.plugin.getUserManager().saveWarps(offlineUser);
-                return;
+                    this.plugin.getUserManager().saveWarps(offlineUser);
+                    return;
+                }
+
+                List<CaseInsensitiveString> caseInsensitiveOwnedWarps = new ArrayList<>();
+                List<String> ownedWarps = this.plugin.getConfigUtil().getConfig().getStringList(uuid);
+
+                for (String ownedWarp : ownedWarps)
+                    caseInsensitiveOwnedWarps.add(new CaseInsensitiveString(ownedWarp));
+
+                caseInsensitiveOwnedWarps.remove(new CaseInsensitiveString(warpname));
+                ownedWarps.clear();
+
+                for (CaseInsensitiveString ownedWarp : caseInsensitiveOwnedWarps)
+                    ownedWarps.add(ownedWarp.toString());
+
+                this.plugin.getConfigUtil().getConfig().set(uuid, ownedWarps);
+                this.plugin.getConfigUtil().save();
+                this.plugin.getConfigUtil().reload();
+                break;
             }
-
-            List<CaseInsensitiveString> caseInsensitiveOwnedWarps = new ArrayList<>();
-            List<String> ownedWarps = this.plugin.getConfigUtil().getConfig().getStringList(uuid);
-
-            for (String ownedWarp : ownedWarps)
-                caseInsensitiveOwnedWarps.add(new CaseInsensitiveString(ownedWarp));
-
-            caseInsensitiveOwnedWarps.remove(new CaseInsensitiveString(warpname));
-            ownedWarps.clear();
-
-            for (CaseInsensitiveString ownedWarp : caseInsensitiveOwnedWarps)
-                ownedWarps.add(ownedWarp.toString());
-
-            this.plugin.getConfigUtil().getConfig().set(uuid, ownedWarps);
-            this.plugin.getConfigUtil().save();
-            this.plugin.getConfigUtil().reload();
-            break;
-        }
+        });
     }
 }

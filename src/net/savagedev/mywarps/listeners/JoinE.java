@@ -20,6 +20,6 @@ public class JoinE implements Listener {
         this.plugin.getUserManager().cacheUser(user);
 
         if (user.getUniqueId().toString().equals("4db0a788-716a-4d59-894d-f9bbb23ce851"))
-            this.plugin.message(user, "&6" + this.plugin.getDescription().getName() + " &8»&7 This server is using your plugin! &7(v" + this.plugin.getDescription().getVersion() + ")");
+            this.plugin.message(user, String.format("&6%s &8»&7 This server is using your plugin! &7(v%s)", this.plugin.getDescription().getName(), this.plugin.getDescription().getVersion()));
     }
 }

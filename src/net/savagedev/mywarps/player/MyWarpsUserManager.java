@@ -33,13 +33,17 @@ public class MyWarpsUserManager {
 
     public void saveWarps(OfflinePlayer user) {
         List<String> ownedWarps = new ArrayList<>();
-
         for (CaseInsensitiveString warp : this.users.get(user.getUniqueId()).getOwnedWarps())
             ownedWarps.add(warp.toString());
 
         this.plugin.getConfigUtil().getConfig().set(user.getUniqueId().toString(), ownedWarps);
+
         this.plugin.getConfigUtil().save();
         this.plugin.getConfigUtil().reload();
+    }
+
+    public void saveWarpsAsync(OfflinePlayer user) {
+        this.plugin.getServer().getScheduler().runTaskAsynchronously(this.plugin, () -> this.saveWarps(user));
     }
 
     public void cacheUser(Player user) {

@@ -35,6 +35,7 @@ public class MyWarpsCmd implements CommandExecutor, TabCompleter {
         this.subCommands.put("move", new MoveCmd(this.plugin, new Permission("mywarps.move")));
         this.subCommands.put("owner", new OwnerCmd(this.plugin, new Permission("mywarps.owner")));
         this.subCommands.put("rename", new RenameCmd(this.plugin, new Permission("mywarps.rename")));
+        this.subCommands.put("renew", new RenewCmd(this.plugin, new Permission("mywarps.renew")));
         this.subCommands.put("transfer", new TransferCmd(this.plugin, new Permission("mywarps.transfer")));
     }
 

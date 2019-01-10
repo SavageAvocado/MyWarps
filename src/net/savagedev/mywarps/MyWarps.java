@@ -7,6 +7,7 @@ import net.savagedev.mywarps.listeners.CommandE;
 import net.savagedev.mywarps.listeners.JoinE;
 import net.savagedev.mywarps.listeners.QuitE;
 import net.savagedev.mywarps.player.MyWarpsUserManager;
+import net.savagedev.mywarps.threads.TaxCollectionThread;
 import net.savagedev.mywarps.utils.ConfigUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -37,6 +38,7 @@ public class MyWarps extends JavaPlugin {
     private void loadUtils() {
         this.configUtil = new ConfigUtil(this);
         this.userManager = new MyWarpsUserManager(this);
+        new TaxCollectionThread(this).runTaskTimerAsynchronously(this, 0L, 1200L);
     }
 
     private void loadDependencies() {

@@ -1,9 +1,10 @@
 costs:
   create: 100
-  delete: 50
+  delete: -75
   move: 25
   rename: 25
   transfer: 0
+  tax: 10
 
 messages:
   player-not-found: '&cCould not find the player &6%player%&c.'
@@ -59,6 +60,8 @@ messages:
   owner: '&7That warp is owned by &6%owner%&7.'
   no-owner: '&7That warp is not owned by anyone.'
   cancelled: '&cOperation cancelled.'
+  tax: '&7You have paid your daily fee of %tax% for your owned warps.'
+  too-poor: '&cThe following warps have been removed because you could not afford to pay the daily fee: %warps%.'
 
 
 first-warp-commands:

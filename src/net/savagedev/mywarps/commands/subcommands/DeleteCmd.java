@@ -64,14 +64,15 @@ public class DeleteCmd extends SubCommand implements Confirmable {
             List<CaseInsensitiveString> ownedWarps = this.getPlugin().getUserManager().getUser(user).getOwnedWarps();
             ownedWarps.remove(new CaseInsensitiveString(name));
 
-            this.getPlugin().getUserManager().saveWarps(user);
+            this.getPlugin().getUserManager().saveWarpsAsync(user);
 
             double cost = this.getPlugin().getConfig().getDouble("costs.delete");
-                this.getPlugin().getVaultDependency().performTransaction(user, cost);
+            this.getPlugin().getVaultDependency().performTransaction(user, cost);
 
             this.getPlugin().message(user, this.getPlugin().getConfig().getString("messages.delete.success"));
         } catch (Exception e) {
             this.getPlugin().message(user, "&cAn error occurred while deleting warp... Please notify an admin.");
+            e.printStackTrace();
         }
     }
 }

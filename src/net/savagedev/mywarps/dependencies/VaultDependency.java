@@ -4,9 +4,12 @@ import net.milkbowl.vault.Vault;
 import net.milkbowl.vault.economy.Economy;
 import net.savagedev.mywarps.MyWarps;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.craftbukkit.libs.jline.internal.Log;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
+
+import java.util.Date;
 
 public class VaultDependency extends Dependency<Vault> {
     private Economy economy;
@@ -25,9 +28,9 @@ public class VaultDependency extends Dependency<Vault> {
             this.getHandlingPlugin().getPluginManager().disablePlugin(this.getHandlingPlugin());
     }
 
-    public void performTransaction(Player user, double amount) {
-        if (amount < 0.0D)
-            this.getEconomy().depositPlayer(user, amount);
+    public void performTransaction(OfflinePlayer user, double amount) {
+        if (amount < 0D)
+            this.getEconomy().depositPlayer(user, Math.abs(amount));
         else
             this.getEconomy().withdrawPlayer(user, amount);
     }

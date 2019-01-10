@@ -60,7 +60,7 @@ public class CreateCmd extends SubCommand implements Confirmable {
                 for (String command : this.getPlugin().getConfig().getStringList("first-warp-commands"))
                     this.getPlugin().getServer().dispatchCommand(this.getPlugin().getServer().getConsoleSender(), command);
 
-            this.getPlugin().getUserManager().saveWarps(user);
+            this.getPlugin().getUserManager().saveWarpsAsync(user);
 
             double cost = this.getPlugin().getConfig().getDouble("costs.create");
             this.getPlugin().message(this.getPlugin().getServer().getConsoleSender(), "" + cost);
@@ -69,6 +69,7 @@ public class CreateCmd extends SubCommand implements Confirmable {
             this.getPlugin().message(user, this.getPlugin().getConfig().getString("messages.create.success"));
         } catch (Exception e) {
             this.getPlugin().message(user, "&cAn error occurred while creating warp... Please notify an admin.");
+            e.printStackTrace();
         }
     }
 }

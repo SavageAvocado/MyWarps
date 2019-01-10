@@ -21,14 +21,16 @@ public class OwnerCmd extends SubCommand {
             return;
         }
 
-        String owner = this.getPlugin().getConfig().getString("messages.no-owner");
-        for (String uuid : this.getPlugin().getConfigUtil().getConfig().getConfigurationSection("").getKeys(false)) {
-            if (this.getPlugin().getConfigUtil().getConfig().getStringList(uuid).stream().anyMatch(args[1]::equalsIgnoreCase)) {
-                owner = this.getPlugin().getConfig().getString("messages.owner").replace("%owner%", Bukkit.getOfflinePlayer(UUID.fromString(uuid)).getName());
-                break;
+        this.getPlugin().getServer().getScheduler().runTaskAsynchronously(this.getPlugin(), () -> {
+            String owner = this.getPlugin().getConfig().getString("messages.no-owner");
+            for (String uuid : this.getPlugin().getConfigUtil().getConfig().getConfigurationSection("").getKeys(false)) {
+                if (this.getPlugin().getConfigUtil().getConfig().getStringList(uuid).stream().anyMatch(args[1]::equalsIgnoreCase)) {
+                    owner = this.getPlugin().getConfig().getString("messages.owner").replace("%owner%", Bukkit.getOfflinePlayer(UUID.fromString(uuid)).getName());
+                    break;
+                }
             }
-        }
 
-        this.getPlugin().message(user, owner);
+            this.getPlugin().message(user, owner);
+        });
     }
 }
